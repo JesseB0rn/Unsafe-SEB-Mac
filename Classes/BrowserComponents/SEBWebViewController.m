@@ -326,7 +326,7 @@
 - (void) disableFlashFullscreen
 {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
-    BOOL allowSwitchToThirdPartyApps = ![preferences secureBoolForKey:@"org_safeexambrowser_elevateWindowLevels"];
+    BOOL allowSwitchToThirdPartyApps = ![preferences secureBoolForKey:@"org_safeexambrowser_elevateWindowLevels"] | true;
     DDLogInfo(@"currentSystemPresentationOptions changed!");
     // If plugins are enabled and there is a Flash view in the webview ...
     if ([[self.sebWebView preferences] arePlugInsEnabled]) {

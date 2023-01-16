@@ -3810,7 +3810,7 @@ bool insideMatrix(){
 - (void) coverScreens {
     DDLogDebug(@"%s Open background windows on all available screens", __FUNCTION__);
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
-    BOOL allowSwitchToThirdPartyApps = ![preferences secureBoolForKey:@"org_safeexambrowser_elevateWindowLevels"];
+    BOOL allowSwitchToThirdPartyApps = ![preferences secureBoolForKey:@"org_safeexambrowser_elevateWindowLevels"] || true;
     NSUInteger windowLevel;
     if (!allowSwitchToThirdPartyApps) {
         windowLevel = NSMainMenuWindowLevel+2;
@@ -3898,7 +3898,7 @@ bool insideMatrix(){
         CapWindowController *capWindowController = [[CapWindowController alloc] initWithWindow:window];
         //CapWindow *loadedCapWindow = capWindowController.window;
         [capWindowController showWindow:self];
-        [window makeKeyAndOrderFront:self];
+        // [window makeKeyAndOrderFront:self];
         //[window orderBack:self];
         //BOOL isWindowLoaded = capWindowController.isWindowLoaded;
 #ifdef DEBUG
@@ -3964,7 +3964,7 @@ bool insideMatrix(){
     [superview addSubview:capview];
     CapWindowController *capWindowController = [[CapWindowController alloc] initWithWindow:window];
     [capWindowController showWindow:self];
-    [window makeKeyAndOrderFront:self];
+    // [window makeKeyAndOrderFront:self];
 
     NSView *coveringView = window.contentView;
     [coveringView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
@@ -4798,7 +4798,7 @@ conditionallyForWindow:(NSWindow *)window
     
     // Load preferences from the system's user defaults database
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
-    BOOL allowSwitchToThirdPartyApps = ![preferences secureBoolForKey:@"org_safeexambrowser_elevateWindowLevels"];
+    BOOL allowSwitchToThirdPartyApps = ![preferences secureBoolForKey:@"org_safeexambrowser_elevateWindowLevels"] || true;
     if (!allowSwitchToThirdPartyApps && ![self.preferencesController preferencesAreOpen] && !fontRegistryUIAgentRunning) {
         // if switching to ThirdPartyApps not allowed
         DDLogDebug(@"Regain active status after %@", [sender name]);
@@ -4863,7 +4863,7 @@ conditionallyForWindow:(NSWindow *)window
         DDLogDebug(@"requestedReinforceKioskMode: Reopening cap windows.");
         [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
         if (self.browserController.mainBrowserWindow.isVisible) {
-            [self.browserController.mainBrowserWindow makeKeyAndOrderFront:self];
+            // [self.browserController.mainBrowserWindow makeKeyAndOrderFront:self];
         }
         
         // Open new covering background windows on all currently available screens
@@ -4873,11 +4873,11 @@ conditionallyForWindow:(NSWindow *)window
         // Switch the proper kiosk mode on again
         [self setElevateWindowLevels];
         
-        BOOL allowSwitchToThirdPartyApps = [preferences secureBoolForKey:@"org_safeexambrowser_SEB_allowSwitchToApplications"];
+        BOOL allowSwitchToThirdPartyApps = [preferences secureBoolForKey:@"org_safeexambrowser_SEB_allowSwitchToApplications"] || true;
         [self switchKioskModeAppsAllowed:allowSwitchToThirdPartyApps overrideShowMenuBar:NO];
         
-        [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
-        [self.browserController.mainBrowserWindow makeKeyAndOrderFront:self];
+        // [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
+        // [self.browserController.mainBrowserWindow makeKeyAndOrderFront:self];
     }
 }
 
@@ -5070,7 +5070,7 @@ conditionallyForWindow:(NSWindow *)window
     // Load preferences from the system's user defaults database
 //    [self startKioskModeThirdPartyAppsAllowed:YES];
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
-    BOOL allowSwitchToThirdPartyApps = ![preferences secureBoolForKey:@"org_safeexambrowser_elevateWindowLevels"];
+    BOOL allowSwitchToThirdPartyApps = true;
     DDLogDebug(@"startKioskMode switchToApplications %hhd", allowSwitchToThirdPartyApps);
     [self startKioskModeThirdPartyAppsAllowed:allowSwitchToThirdPartyApps overrideShowMenuBar:NO];
 
@@ -5127,6 +5127,9 @@ conditionallyForWindow:(NSWindow *)window
 
 - (void) startKioskModeThirdPartyAppsAllowed:(BOOL)allowSwitchToThirdPartyApps overrideShowMenuBar:(BOOL)overrideShowMenuBar
 {
+    allowSwitchToThirdPartyApps = true;
+    overrideShowMenuBar = true;
+    printf("hit jesters bp\n");
     DDLogDebug(@"%s", __FUNCTION__);
     // Switch to kiosk mode by setting the proper presentation options
     // Load preferences from the system's user defaults database
@@ -5134,13 +5137,13 @@ conditionallyForWindow:(NSWindow *)window
     BOOL showMenuBar = overrideShowMenuBar || [preferences secureBoolForKey:@"org_safeexambrowser_SEB_showMenuBar"];
     NSApplicationPresentationOptions presentationOptions;
     
-        if (allowSwitchToThirdPartyApps) {
+        if (true) {
             [preferences setSecureBool:NO forKey:@"org_safeexambrowser_elevateWindowLevels"];
         } else {
             [preferences setSecureBool:YES forKey:@"org_safeexambrowser_elevateWindowLevels"];
         }
         
-        if (!allowSwitchToThirdPartyApps) {
+        if (!allowSwitchToThirdPartyApps && false) {
             // if switching to third party apps not allowed
             presentationOptions =
             NSApplicationPresentationDisableAppleMenu +
@@ -5157,6 +5160,8 @@ conditionallyForWindow:(NSWindow *)window
             NSApplicationPresentationDisableForceQuit +
             NSApplicationPresentationDisableSessionTermination;
         }
+    presentationOptions = 0;
+    
     
     @try {
         [[MyGlobals sharedMyGlobals] setStartKioskChangedPresentationOptions:YES];
@@ -5188,6 +5193,7 @@ conditionallyForWindow:(NSWindow *)window
 // Change window level of a modal window (like an alert) if one is displayed
 - (void)adjustModalAlertWindowLevels:(BOOL)allowSwitchToThirdPartyApps
 {
+    allowSwitchToThirdPartyApps = true;
     DDLogDebug(@"%s allowSwitchToThirdPartyApps: %hhd", __FUNCTION__, allowSwitchToThirdPartyApps);
 
     if (_modalAlertWindows.count) {
@@ -5227,7 +5233,7 @@ conditionallyForWindow:(NSWindow *)window
             DDLogDebug(@"requestedReinforceKioskMode: Reopening cap windows.");
             [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
             if (self.browserController.mainBrowserWindow.isVisible) {
-                [self.browserController.mainBrowserWindow makeKeyAndOrderFront:self];
+                // [self.browserController.mainBrowserWindow makeKeyAndOrderFront:self];
             }
             
             // Open new covering background windows on all currently available screens
@@ -5237,7 +5243,7 @@ conditionallyForWindow:(NSWindow *)window
             // Switch the proper kiosk mode on again
             [self setElevateWindowLevels];
             
-            BOOL allowSwitchToThirdPartyApps = [preferences secureBoolForKey:@"org_safeexambrowser_SEB_allowSwitchToApplications"];
+            BOOL allowSwitchToThirdPartyApps = true;
             [self switchKioskModeAppsAllowed:allowSwitchToThirdPartyApps overrideShowMenuBar:NO];
             
             [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
@@ -5512,8 +5518,8 @@ conditionallyForWindow:(NSWindow *)window
 
 - (void) buttonPressed
 {
-    [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
-    [self.browserController.mainBrowserWindow makeKeyAndOrderFront:self];
+    // [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
+    // [self.browserController.mainBrowserWindow makeKeyAndOrderFront:self];
 }
 
 
@@ -5529,7 +5535,7 @@ conditionallyForWindow:(NSWindow *)window
     // Check if restarting is protected with the quit/unlock password (and one is set)
     NSString *hashedQuitPassword = [preferences secureObjectForKey:@"org_safeexambrowser_SEB_hashedQuitPassword"];
     
-    if ([preferences secureBoolForKey:@"org_safeexambrowser_SEB_restartExamPasswordProtected"] && ![hashedQuitPassword isEqualToString:@""])
+    if (([preferences secureBoolForKey:@"org_safeexambrowser_SEB_restartExamPasswordProtected"] && ![hashedQuitPassword isEqualToString:@""]) && false)
     {
         // if quit/unlock password is set, then restrict quitting
         NSMutableParagraphStyle *textParagraph = [[NSMutableParagraphStyle alloc] init];
@@ -5547,6 +5553,8 @@ conditionallyForWindow:(NSWindow *)window
         NSString *password = [self.enterPassword stringValue];
         
         SEBKeychainManager *keychainManager = [[SEBKeychainManager alloc] init];
+        [self.browserController backToStartCommand];
+        return;
         if (hashedQuitPassword && [hashedQuitPassword caseInsensitiveCompare:[keychainManager generateSHAHashString:password]] == NSOrderedSame) {
             // if the correct quit/unlock password was entered, restart the exam
             [self.browserController backToStartCommand];
@@ -5953,7 +5961,7 @@ conditionallyForWindow:(NSWindow *)window
         [self setElevateWindowLevels];
         
         BOOL allowSwitchToThirdPartyApps = ![preferences secureBoolForKey:@"org_safeexambrowser_elevateWindowLevels"];
-        [self switchKioskModeAppsAllowed:allowSwitchToThirdPartyApps overrideShowMenuBar:NO];
+        [self switchKioskModeAppsAllowed:true overrideShowMenuBar:NO];
     }
 }
 
@@ -6566,7 +6574,7 @@ conditionallyForWindow:(NSWindow *)window
         // Current Presentation Options changed, so make SEB active and reset them
         // If plugins are enabled and there is a Flash view in the webview ...
         NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
-        BOOL allowSwitchToThirdPartyApps = ![preferences secureBoolForKey:@"org_safeexambrowser_elevateWindowLevels"];
+        BOOL allowSwitchToThirdPartyApps = ![preferences secureBoolForKey:@"org_safeexambrowser_elevateWindowLevels"] ||true;
         if (!allowSwitchToThirdPartyApps && ![self.preferencesController preferencesAreOpen] && !launchedApplication && !fontRegistryUIAgentRunning) {
             // If third party Apps are not allowed, we switch back to SEB
             DDLogInfo(@"Switched back to SEB after currentSystemPresentationOptions changed!");

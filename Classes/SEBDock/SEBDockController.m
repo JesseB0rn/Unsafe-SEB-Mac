@@ -400,7 +400,7 @@
 
 - (void) activateDockFirstControl:(BOOL)firstControl
 {
-    [self.window makeKeyAndOrderFront:self];
+    // [self.window makeKeyAndOrderFront:self];
     if (firstControl) {
         [self makeFirstDockItemFirstResponder];
     } else {

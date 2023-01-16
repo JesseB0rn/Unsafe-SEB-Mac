@@ -164,7 +164,7 @@
     self.activeBrowserWindowTitle = NSLocalizedString(@"Untitled", @"Title of a new opened browser window; Untitled");
     [newBrowserWindow setCalculatedFrameOnScreen:newBrowserWindow.screen mainBrowserWindow:mainBrowserWindow temporaryWindow:temporaryWindow];
     [newBrowserWindow.windowController showWindow:self];
-    [newBrowserWindow makeKeyAndOrderFront:self];
+    // [newBrowserWindow makeKeyAndOrderFront:self];
     [self transferCookiesToWKWebViewWithCompletionHandler:^{
         [newWindowWebView loadURL:url];
     }];
@@ -338,7 +338,7 @@
     
     
     [self.mainBrowserWindow makeMainWindow];
-    [self.mainBrowserWindow makeKeyAndOrderFront:self];
+    // [self.mainBrowserWindow makeKeyAndOrderFront:self];
 //    self.activeBrowserWindow = self.mainBrowserWindow;
 }
 
@@ -362,7 +362,7 @@
 {
     if (self.mainBrowserWindow.isVisible) {
         [self.mainBrowserWindow setCalculatedFrame];
-        [self.mainBrowserWindow makeKeyAndOrderFront:self];
+        // [self.mainBrowserWindow makeKeyAndOrderFront:self];
     }
 }
 
@@ -380,7 +380,7 @@
     }
     
     [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
-    [self.mainBrowserWindow makeKeyAndOrderFront:self];
+    // [self.mainBrowserWindow makeKeyAndOrderFront:self];
 }
 
 
@@ -402,7 +402,7 @@
     }
     
     [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
-    [self.mainBrowserWindow makeKeyAndOrderFront:self];
+    // [self.mainBrowserWindow makeKeyAndOrderFront:self];
 }
 
 
@@ -500,7 +500,7 @@
 
 - (void) activateCurrentWindow
 {
-    [self.activeBrowserWindow makeKeyAndOrderFront:self];
+    // [self.activeBrowserWindow makeKeyAndOrderFront:self];
     [self.activeBrowserWindow makeContentFirstResponder];
 }
 
@@ -632,7 +632,7 @@
     DDLogInfo(@"Selected menu item: %@", sender);
 
     [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
-    [sender.browserWindow makeKeyAndOrderFront:self];
+    // [sender.browserWindow makeKeyAndOrderFront:self];
 }
 
 

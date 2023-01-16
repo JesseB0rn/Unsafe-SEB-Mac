@@ -3795,9 +3795,7 @@
 						ProvisioningStyle = Manual;
 					};
 					69F7B5FA14F411FB00FD0761 = {
-						DevelopmentTeam = 6F38DNSC7X;
 						LastSwiftMigration = 1030;
-						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -6072,13 +6070,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "Safe Exam Browser/Safe Exam Browser.entitlements";
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 14479;
-				DEVELOPMENT_TEAM = 6F38DNSC7X;
+				DEVELOPMENT_TEAM = 8C7KT6ZU59;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6095,6 +6093,8 @@
 					"osx-mbedtls/mbedtls/mbedtls/include",
 				);
 				INFOPLIST_FILE = "SafeExamBrowser-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "unsafe Exam Browser";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INSTALL_PATH = /Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -6112,10 +6112,10 @@
 				MARKETING_VERSION = 3.2.2;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CODE_SIGN_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = org.safeexambrowser.SafeExamBrowser;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jb0.unSafeExamBrowser;
 				PRODUCT_NAME = "Safe Exam Browser";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "SEB macOS Assessment Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "OtherSources/SEB-Bridging-Header.h";
@@ -6134,13 +6134,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "Safe Exam Browser/Safe Exam Browser.entitlements";
-				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Daniel Schneider (6F38DNSC7X)";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 14479;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 6F38DNSC7X;
+				DEVELOPMENT_TEAM = 8C7KT6ZU59;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6160,6 +6160,8 @@
 					"osx-mbedtls/mbedtls/mbedtls/include",
 				);
 				INFOPLIST_FILE = "SafeExamBrowser-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "unsafe Exam Browser";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INSTALL_PATH = /Applications;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -6177,10 +6179,10 @@
 				MARKETING_VERSION = 3.2.2;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CODE_SIGN_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = org.safeexambrowser.SafeExamBrowser;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jb0.unSafeExamBrowser;
 				PRODUCT_NAME = "Safe Exam Browser";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Developer ID Assessment Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "OtherSources/SEB-Bridging-Header.h";

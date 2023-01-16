@@ -252,7 +252,7 @@
     // If Preferences are being closed and we're not just refreshing the preferences window
     if (!self.refreshingPreferences) {
         [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
-        [self.sebController.browserController.mainBrowserWindow makeKeyAndOrderFront:self];
+        // [self.sebController.browserController.mainBrowserWindow makeKeyAndOrderFront:self];
         shouldClose = [self conditionallyClosePreferencesWindowAskToApply:YES];
     }
     if (shouldClose) {

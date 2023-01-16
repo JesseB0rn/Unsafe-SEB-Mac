@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
     // Swizzle NSWindow setLevel: Method
     [NSWindow setupChangingWindowLevels];
             [WebView setupOverridePlugins];
-
+    
     return NSApplicationMain(argc,  (const char **) argv);
     }
 }

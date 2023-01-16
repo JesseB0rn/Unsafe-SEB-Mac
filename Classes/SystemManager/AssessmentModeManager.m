@@ -36,7 +36,7 @@
     self.assessmentSession = session;
     [self.delegate assessmentSessionWillBegin];
     
-    [session begin];
+    // [session begin];
     return YES;
 }
 

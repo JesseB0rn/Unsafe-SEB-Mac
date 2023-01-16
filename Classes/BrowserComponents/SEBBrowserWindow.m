@@ -1099,7 +1099,7 @@
 
 - (void) makeActiveAndOrderFront
 {
-    [self makeKeyAndOrderFront:self];
+    // [self makeKeyAndOrderFront:self];
 }
 
 - (void) showWebView:(SEBAbstractWebView *)webView
@@ -1290,7 +1290,7 @@
         
         NSString *titleString = NSLocalizedString(@"Load Error",nil);
         [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
-        [self makeKeyAndOrderFront:self];
+        // [self makeKeyAndOrderFront:self];
         
         NSAlert *modalAlert = [self.browserController.sebController newAlert];
         [modalAlert setMessageText:titleString];
@@ -1359,7 +1359,7 @@ completionHandler:(void (^)(void))completionHandler
 {
     NSString *pageTitle = webView.title;
     [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
-    [self makeKeyAndOrderFront:self];
+    // [self makeKeyAndOrderFront:self];
     
     NSAlert *modalAlert = [self.browserController.sebController newAlert];
     DDLogWarn(@"%s: %@", __FUNCTION__, message);
@@ -1379,7 +1379,7 @@ completionHandler:(void (^)(void))completionHandler
 runJavaScriptAlertPanelWithMessage:(NSString *)message
 {
     [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
-    [self makeKeyAndOrderFront:self];
+    // [self makeKeyAndOrderFront:self];
     
     NSAlert *modalAlert = [self.browserController.sebController newAlert];
     DDLogWarn(@"%s: %@", __FUNCTION__, message);
@@ -1401,7 +1401,7 @@ completionHandler:(void (^)(BOOL result))completionHandler
 {
     NSString *pageTitle = webView.title;
     [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
-    [self makeKeyAndOrderFront:self];
+    // [self makeKeyAndOrderFront:self];
     
     NSModalResponse alertResultButton;
     if (@available(macOS 12.0, *)) {
@@ -1431,7 +1431,7 @@ completionHandler:(void (^)(BOOL result))completionHandler
 runJavaScriptConfirmPanelWithMessage:(NSString *)message
 {
     [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
-    [self makeKeyAndOrderFront:self];
+    // [self makeKeyAndOrderFront:self];
     
     NSModalResponse alertResultButton;
     if (@available(macOS 12.0, *)) {
@@ -1524,7 +1524,7 @@ completionHandler:(void (^)(NSArray<NSURL *> *URLs))completionHandler
                 if (lastDownloadPath && [[NSFileManager defaultManager] fileExistsAtPath:lastDownloadPath]) {
                     completionHandler(@[[NSURL fileURLWithPath:lastDownloadPath]]);
                     [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
-                    [self makeKeyAndOrderFront:self];
+                    // [self makeKeyAndOrderFront:self];
                     
                     NSAlert *modalAlert = [self.browserController.sebController newAlert];
                     DDLogInfo(@"File to upload automatically chosen");
@@ -1543,7 +1543,7 @@ completionHandler:(void (^)(NSArray<NSURL *> *URLs))completionHandler
             if ([preferences secureIntegerForKey:@"org_safeexambrowser_SEB_chooseFileToUploadPolicy"] == onlyAllowUploadSameFileDownloadedBefore) {
                 // if the policy is "Only allow to upload the same file downloaded before"
                 [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
-                [self makeKeyAndOrderFront:self];
+                // [self makeKeyAndOrderFront:self];
                 
                 NSAlert *modalAlert = [self.browserController.sebController newAlert];
                 DDLogError(@"File to upload (which was downloaded before) not found");
@@ -1594,7 +1594,7 @@ completionHandler:(void (^)(NSArray<NSURL *> *URLs))completionHandler
         openFilePanel.directoryURL = [NSURL fileURLWithPathString:downloadPath];
         
         [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
-        [self makeKeyAndOrderFront:self];
+        // [self makeKeyAndOrderFront:self];
         
         // Display the dialog.  If the OK button was pressed,
         // process the files.
