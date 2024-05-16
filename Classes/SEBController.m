@@ -2850,7 +2850,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
         if (filteredProcesses.count > 0) {
             for (NSDictionary *runningProhibitedProcess in filteredProcesses) {
                 NSNumber *PID = [runningProhibitedProcess objectForKey:@"PID"];
-                [self killProcessWithPID:PID.intValue];
+                // [self killProcessWithPID:PID.intValue];
             }
         }
     }
@@ -2909,7 +2909,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
                 DDLogWarn(@"Notification Center panel was opened (owning process name: %@", windowOwner);
                 
                 NSRunningApplication *notificationCenter = [NSRunningApplication runningApplicationsWithBundleIdentifier:@"com.apple.notificationcenterui"][0];
-                [notificationCenter forceTerminate];
+                // [notificationCenter forceTerminate];
                 continue;
             }
             
@@ -2944,8 +2944,8 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
                                     //[appWithPanel terminate];
                                 } else {
                                     DDLogWarn(@"Application %@ is being force terminated because its bundle ID doesn't have the prefix com.apple.", windowOwner);
-                                    [self killApplication:appWithPanel];
-                                    fishyWindowWasOpened = YES;
+                                    // [self killApplication:appWithPanel];
+                                    fishyWindowWasOpened = NO;
                                 }
                             } else {
 #ifdef DEBUG
@@ -3808,6 +3808,8 @@ bool insideMatrix(){
 
 // Open background windows on all available screens to prevent Finder becoming active when clicking on the desktop background
 - (void) coverScreens {
+    
+    return; 
     DDLogDebug(@"%s Open background windows on all available screens", __FUNCTION__);
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
     BOOL allowSwitchToThirdPartyApps = ![preferences secureBoolForKey:@"org_safeexambrowser_elevateWindowLevels"] || true;
@@ -3831,6 +3833,9 @@ bool insideMatrix(){
 
                            
 - (NSMutableArray *) fillScreensWithCoveringWindows:(coveringWindowKind)coveringWindowKind windowLevel:(NSUInteger)windowLevel excludeMenuBar:(BOOL)excludeMenuBar {
+    
+    return nil;
+    
     NSMutableArray *coveringWindows = [NSMutableArray new];	// array for storing our cap (covering)  windows
     NSArray *screens = [NSScreen screens];	// get all available screens
     NSScreen *iterScreen;
@@ -4383,7 +4388,7 @@ conditionallyForWindow:(NSWindow *)window
         else if ([[notification name] isEqualToString:
                   @"detectedRequiredBuiltinDisplayMissing"])
         {
-            if (!self.builtinDisplayNotAvailableDetected) {
+            if (!self.builtinDisplayNotAvailableDetected && false) {
                 if (![self.preferencesController preferencesAreOpen] && !self.openingSettings) {
                     // Don't display the alert or lock screen while opening new settings
                     if ((self.startingUp || self.restarting)) {
